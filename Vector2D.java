@@ -9,7 +9,7 @@ public class Vector2D {
 
     public Vector2D(double x_coord) {
         coords[0] = x_coord;
-        coords[1] = y_coord;
+        coords[1] = x_coord;
     }
 
     public Vector2D() {
@@ -39,7 +39,7 @@ public class Vector2D {
     }
 
     public double magnitude() {
-        return Math.sqrt(coords[0]*coords[0] + coords[1]*coords[1]);
+        return Math.sqrt(Math.pow(coords[0], 2) + Math.pow(coords[1], 2));
     }
 
     public double distanceTo(double x, double y) {
@@ -73,12 +73,13 @@ public class Vector2D {
     }
 
     public void addEq(Vector2D v) {
-        coords[0] += v[0];
-        coords[1] += v[1];
+        coords[0] += v.getX();
+        coords[1] += v.getY();
     }
 
     public double angle() {
-        return Math.atan2(coords[1],coords[0]);
+        if (coords[0] == 0) return Math.PI/2;
+        return Math.atan(coords[1]/coords[0]);
     }
 
     public void rotate(double angleInRadians) {
@@ -86,7 +87,7 @@ public class Vector2D {
         double sinRY = Math.sin(angle);
         double x = coords[0];
         double y = coords[1];
-        setX((x*cosRY)-(y*sinRY));
-        setY((x*sinRY)+(y*cosRY));
+        coords[0] = (x*cosRY)-(y*sinRY);
+        coords[1] = (x*sinRY)+(y*cosRY);
     }
 }

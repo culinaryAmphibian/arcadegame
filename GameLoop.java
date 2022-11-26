@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -24,7 +25,15 @@ public class GameLoop extends Application
     public void start(Stage primaryStage) {
         final double HEIGHT = 300.0, WIDTH = 400.0;
         primaryStage.setTitle("hi");
+        Button btn1 = new Button("press to start");
+        btn1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent arg0) {
+                System.out.println("hello world");
+            }
+        });
         Group root = new Group();
+        root.getChildren().add(btn1);
         Scene primaryScene = new Scene(root);
         primaryStage.setScene(primaryScene);
         Canvas canvas = new Canvas(400, 300);
@@ -56,9 +65,7 @@ public class GameLoop extends Application
         Font mainFont = Font.font("Courier Sans MS", FontWeight.THIN, 20);
         ctx.setFont(mainFont);
         ctx.fillText("hello", WIDTH/2, HEIGHT/2);
-        ArrayList<Double> velocity = new ArrayList<Double>();
-        velocity.add((Double) 1.0);
-        velocity.add((Double) 1.0);
+        Vector2D velocity = new Vector2D(1, 1);
         final long startNanoTime = System.nanoTime();
         Text word = new Text(10, 50, "hello");
         root.getChildren().add(word);
@@ -71,7 +78,7 @@ public class GameLoop extends Application
                 if (word.getX() + word.getLayoutBounds().getWidth() + velocity.get(0) > WIDTH || word.getX() + velocity.get(0) < 0) {
                     velocity.set(0, velocity.get(0) * -1);
                 }
-                if (word.getY() + word.getLayoutBounds().getHeight()/2 + velocity.get(1) - 10 > HEIGHT || word.getY() + velocity.get(1) - 15 < 0) {
+                if (word.getY() + word.getLayoutBounds().getHeight()/2 + velocity.get(1) - 10 > HEIGHT || word.getY() + velocity.get(1) < 15) {
                     velocity.set(1, velocity.get(1) * -1);
                 }
                 word.setX(word.getX() + velocity.get(0));

@@ -1,10 +1,10 @@
 public class Vector2D {
 
-    private double[] coords;
+    private double[] coords = {0, 0};
 
     public Vector2D(double x, double y) {
-        coords[0] = x_coord;
-        coords[1] = y_coord;
+        coords[0] = x;
+        coords[1] = y;
     }
 
     public Vector2D(double x_coord) {
@@ -12,10 +12,7 @@ public class Vector2D {
         coords[1] = x_coord;
     }
 
-    public Vector2D() {
-        coords[0] = 0.0;
-        coords[1] = 0.0;
-    }
+    public Vector2D() { }
 
     public double getX() {
         return coords[0];
@@ -30,12 +27,22 @@ public class Vector2D {
     }
 
     public void setY(double newY) {
-        coods[1] = newY;
+        coords[1] = newY;
     }
 
-    public void reset(double x_coord || 0.0, double y_coord || 0.0) {
+    public void reset(double x_coord, double y_coord) {
         coords[0] = x_coord;
         coords[1] = y_coord;
+    }
+
+    public void reset(double coord) {
+        coords[0] = coord;
+        coords[1] = coord;
+    }
+
+    public void reset() {
+        coords[0] = 0;
+        coords[1] = 0;
     }
 
     public double magnitude() {
@@ -82,7 +89,7 @@ public class Vector2D {
         return Math.atan(coords[1]/coords[0]);
     }
 
-    public void rotate(double angleInRadians) {
+    public void rotate(double angle) {
         double cosRY = Math.cos(angle);
         double sinRY = Math.sin(angle);
         double x = coords[0];

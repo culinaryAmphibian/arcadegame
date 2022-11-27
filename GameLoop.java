@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
+/*
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -92,3 +94,35 @@ public class GameLoop extends Application
         launch(args);
     }
 } 
+*/
+
+public class GameLoop extends Frame {
+	final int WIDTH = 300;
+	final int HEIGHT = 200;
+	Lander lander;
+	Landscape landscape;
+    public GameLoop() {
+        setSize(WIDTH, HEIGHT);
+        setTitle("Moon Lander");
+        setLayout(null);
+        setVisible(true);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		lander = new Lander(this);
+		landscape = new Landscape(WIDTH, HEIGHT);
+		landscape.generateMore(true);
+    }
+	public void paint(Graphics g) {
+		g.drawString("hello world", WIDTH/2, HEIGHT/2);
+		lander.update();
+		lander.render(g);
+		landscape.drawLandscape(g, lander.getPos());
+	}
+    public static void main(String[] args) {
+        new GameLoop();
+    }
+}

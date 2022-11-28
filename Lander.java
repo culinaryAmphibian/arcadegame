@@ -67,7 +67,7 @@ public class Lander {
 
     }
     public void render(Graphics g) {
-
+        g.drawOval(frame.getWidth()/2, frame.getHeight()/2, frame.getHeight()/5, frame.getHeight()/5);
     }
     public void crash() {
 

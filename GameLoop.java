@@ -4,8 +4,8 @@ import java.awt.event.*;
 public class GameLoop extends Frame {
 	final int WIDTH = 400;
 	final int HEIGHT = 400;
-	Lander lander;
-	Landscape landscape;
+	Lander lander = new Lander(this);
+	Landscape landscape = new Landscape(WIDTH, HEIGHT);
     public GameLoop() {
         setSize(WIDTH, HEIGHT);
         setTitle("Moon Lander");
@@ -30,9 +30,7 @@ public class GameLoop extends Frame {
 
             }
         });
-		lander = new Lander(this);
-		landscape = new Landscape(WIDTH, HEIGHT);
-		landscape.generateMore(true);
+		landscape.generate((int) lander.getPos().getX());
     }
 	public void paint(Graphics g) {
 		lander.update();
